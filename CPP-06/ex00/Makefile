@@ -4,11 +4,11 @@ NAME 		= scalar
 
 CXX		= c++
 
-CFLAGS		= -std=c++98
+CFLAGS		= -g3 -std=c++98
 
 INCLUDES	=  ScalarConverter.hpp
 
-FILES		= main ScalarConverter
+FILES		= CharConverter FloatConverter DoubleConverter ScalarConverter DecimalConverter main
 
 SRCS		= $(addsuffix .cpp, $(FILES))
 

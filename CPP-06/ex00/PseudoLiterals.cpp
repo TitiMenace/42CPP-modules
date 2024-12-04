@@ -1,17 +1,6 @@
-#include "ScalarConverter.hpp"
-
-ScalarConverter::ScalarConverter(void){
-
-	return;
-}
-
-ScalarConverter::~ScalarConverter(void){
-
-	return;
-}
 
 
-static void	PseudoLiterals(size_t i){
+void	PseudoLiterals(size_t i){
 
 	switch(i){
 	
@@ -32,29 +21,4 @@ static void	PseudoLiterals(size_t i){
 			std::cout << "double : nan" << std::endl;
 	}
 }
-
-void	ScalarConverter::convert(std::string literal){
-	
-/*	size_t	i = 0;
-
-	std::string	pseudo_literals[6] = {
-
-		"-inff", "+inff", "nanf",
-		"-inf", "+inf", "nan"
-	};
-	for (; i < 6, i++;){
-		if (literal == pseudo_literals[i])
-	 		break;
-	}
-	if (i <= 5){
-		i = i / 2 + (i % 2);
-		PseudoLiterals(i);
-	}*/
-
-	if (CharConverter(literal) || FloatConverter(literal) || DoubleConverter(literal) || 
-			DecimalConverter(literal))
-		return ;
-
-}
-	
 
