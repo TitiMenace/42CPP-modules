@@ -66,6 +66,10 @@ bool	ScalarConverter::FloatConverter(const std::string literal){
 			std::cout << "char : "<< static_cast<char>(int_convert) << std::endl;
 		else
 			std::cout << "char : Non displayable" << std::endl;
+		if (value > INT_MAX || value < INT_MIN)
+			std::cout << "int : Impossible not in Range" << std::endl;
+		else
+			std::cout << "int : " << int_convert << std::endl;
 		std::cout << "int : " << int_convert << std::endl;
 		std::cout << "float : " << value << "f" << std::endl;
 		std::cout << "double : " << static_cast<double>(value) << std::endl;

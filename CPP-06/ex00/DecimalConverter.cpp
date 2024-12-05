@@ -3,9 +3,9 @@
 
 bool	ScalarConverter::DecimalConverter(const std::string literal){
 
-	int value;
+	long long value;
 	int	sign = 1;
-	int	out = 0;
+	long long out = 0;
 	std::string::const_iterator	it = literal.begin();
 
 	if (literal[0] == '-' || literal[0] == '+'){
@@ -26,7 +26,10 @@ bool	ScalarConverter::DecimalConverter(const std::string literal){
 			std::cout << "char : "<< static_cast<char>(value) << std::endl;
 		else
 			std::cout << "char : Non displayable" << std::endl;
-	std::cout << "int : " << value << std::endl;
+	if (value > INT_MAX || value < INT_MIN)
+		std::cout << "int : Impossible not in Range" << std::endl;
+	else
+		std::cout << "int : " << value << std::endl;
 	std::cout << "float : " << static_cast<float>(value) << ".0f" << std::endl;
 	std::cout << "double : " << static_cast<double>(value) << ".0" << std::endl;
 	return true;	
