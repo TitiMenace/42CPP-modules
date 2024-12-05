@@ -20,10 +20,12 @@ bool	ScalarConverter::DecimalConverter(const std::string literal){
 		it++;
 	}
 	value = sign * out;
-	if (std::isprint(static_cast<char>(value)))
-		std::cout << "char : " << static_cast<char>(value) << std::endl;
-	else
-		std::cout << "char : " << "Impossible" << std::endl;
+	if (value < 0 || value > 255)
+			std::cout << "char : Impossible" << std::endl;
+		else if (std::isprint(value))
+			std::cout << "char : "<< static_cast<char>(value) << std::endl;
+		else
+			std::cout << "char : Non displayable" << std::endl;
 	std::cout << "int : " << value << std::endl;
 	std::cout << "float : " << static_cast<float>(value) << ".0f" << std::endl;
 	std::cout << "double : " << static_cast<double>(value) << ".0" << std::endl;

@@ -4,19 +4,16 @@
 
 
 
-int	main(void)
+int	main(int ac, char **av)
 {
+	std::string value;
 
-	std::cout << FLT_MAX << std::endl;
-
-	std::cout << "Test 1 : 7\n";
-	ScalarConverter::convert("7312321132.321321312321f");	
-	std::cout << "Test 2 : 2342\n";
-	ScalarConverter::convert("2342");	
-	std::cout << "Test 3 : -231\n";
-	ScalarConverter::convert("4324723987492834729321890984059384095803485");	
-	std::cout << "Test 4 : caca.wddwf\n";
-	ScalarConverter::convert("caca.wddw");	
-	std::cout << "Test 5 : -.f\n";
-	ScalarConverter::convert("-.f");
+	if (ac != 2)
+		return 1;
+	else {
+		value = av[1];
+		std::cout << "Test 1 : " << value << std::endl;
+		ScalarConverter::convert(value);
+	}
+	return 0;
 }

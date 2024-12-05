@@ -53,11 +53,19 @@ static float	DoubleConversion(const std::string literal){
 bool	ScalarConverter::DoubleConverter(const std::string literal){
 
 	double	value;
+	int		int_convert;
 
 	if (CheckDouble(literal)){
-	 	value = DoubleConversion(literal);
-		std::cout << "char : Impossible" << std::endl;
-		std::cout << "int : " << static_cast<int>(value) << std::endl;
+	 
+		value = DoubleConversion(literal);
+		int_convert =  static_cast<int>(value);
+		if (int_convert < 0 || int_convert > 255)
+			std::cout << "char : Impossible" << std::endl;
+		else if (std::isprint(int_convert))
+			std::cout << "char : "<< static_cast<char>(int_convert) << std::endl;
+		else
+			std::cout << "char : Non displayable" << std::endl;
+		std::cout << "int : " << int_convert << std::endl;
 		std::cout << "float : " << static_cast<float>(value) << "f" << std::endl;
 		std::cout << "double : " << value << std::endl;
 		return true;
