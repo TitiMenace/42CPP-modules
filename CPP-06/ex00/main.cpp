@@ -12,7 +12,7 @@ int	main(int ac, char **av)
 		return 1;
 	else {
 		value = av[1];
-		std::cout << "Test 1 : " << value << std::endl;
+	//	std::cout << "Test 1 : " << value << std::endl;
 		ScalarConverter::convert(value);
 	}
 	return 0;

@@ -70,7 +70,6 @@ bool	ScalarConverter::FloatConverter(const std::string literal){
 			std::cout << "int : Impossible not in Range" << std::endl;
 		else
 			std::cout << "int : " << int_convert << std::endl;
-		std::cout << "int : " << int_convert << std::endl;
 		std::cout << "float : " << value << "f" << std::endl;
 		std::cout << "double : " << static_cast<double>(value) << std::endl;
 		return true;
