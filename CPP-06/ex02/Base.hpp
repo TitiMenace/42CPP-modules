@@ -2,18 +2,18 @@
 
 #include <string>
 #include <iostream>
+#include <unistd.h>
+#include <cstdlib>
 
-#include "ABC.hpp"
 
 class	Base{
 
-	public:
-			virtual ~Base();
+		public:
+		virtual ~Base(){};
 	
-	private:
+};	
 		
-			Base();
-			Base*	generate(void);
-			void	identify(Base* p);
-			void	identify(Base& p);
-};
+Base*	generate(void);
+void	identify(Base* p);
+void	identify(Base& p);
+
