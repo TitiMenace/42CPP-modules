@@ -12,6 +12,5 @@ int main() {
 
 	std::cout << "str_array: ";
 	iter(str_array, 5, print);
-	std::cout << std::endl;
 	return 0;
 }

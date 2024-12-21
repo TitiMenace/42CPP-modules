@@ -1,10 +1,13 @@
-NAME 		= template
 
-CXX		= c++
+
+
+NAME 		= array
+
+CXX		= c++ 
 
 CFLAGS		= -g3 -Wall -Wextra -Werror -std=c++98
 
-INCLUDES	=  template.hpp
+INCLUDES	=  Array.hpp
 
 FILES		= main
 
