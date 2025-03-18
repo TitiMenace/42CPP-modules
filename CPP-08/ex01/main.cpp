@@ -1,5 +1,32 @@
 #include "Span.hpp"
 
+
+void bigSpanTest()
+{
+        // std::vector<int>    v(10000);
+        // std::generate( v.begin(), v.end(), std::rand );
+        
+        // Span span( v.size() );
+        // std::cout << span.getN() << std::endl;;
+        // span.addNumbers( v.begin(), v.end() );
+        // std::cout << "Longest span: " << span.longestSpan() << std::endl;
+        // std::cout << "Shortest span: " << span.shortestSpan() << std::endl;
+        std::vector<int>    v;
+        for (int i = 0; i < 10000; i++)
+        {
+            v.push_back(i * 3);
+        }
+        
+        Span span( v.size() );
+        
+        span.fillSpan( v.begin(), v.end() );
+
+        std::cout << "Longest span: " << span.longestSpan() << std::endl;
+        std::cout << "Shortest span: " << span.shortestSpan() << std::endl;
+    
+}
+
+
 int main()
 {
 
@@ -27,6 +54,12 @@ int main()
 
 	} catch (std::exception &e){
 	
+		std::cerr << e.what() << std::endl;
+	}
+
+	try {
+		bigSpanTest();
+	} catch (std::exception &e){
 		std::cerr << e.what() << std::endl;
 	}
 }

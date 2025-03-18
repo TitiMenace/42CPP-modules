@@ -5,6 +5,7 @@
 #include <exception>
 #include <iostream>
 #include <vector>
+#include <climits>
 
 class	LimitStorageReached :	std::exception {
 	public:
@@ -27,6 +28,8 @@ class Span{
 			void print(void);
 			void fillSpan(const std::vector<int>::iterator &begin, const std::vector<int>::iterator &end);
 
+			unsigned int	shortestSpan(void) const;
+			unsigned int	longestSpan(void) const;
 	private:
 
 			unsigned int		_limit;

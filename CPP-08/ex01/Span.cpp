@@ -57,3 +57,29 @@ void	Span::print(void)
 	}
 	std::cout << std::endl;
 }
+
+
+unsigned int Span::shortestSpan(void) const
+{
+	unsigned int min_dist = INT_MAX;
+	std::vector<int>::const_iterator prev_it = _span.begin();
+
+	if (_span.size() < 2)
+		return 0;
+	for (std::vector<int>::const_iterator it = _span.begin(); it != _span.end();  it++)
+	{
+		if (prev_it != it && std::abs(*it - *prev_it) < (min_dist))
+			min_dist = std::abs(*it - *prev_it);
+		prev_it = it;
+	}
+	return (min_dist);
+}
+
+unsigned int Span::longestSpan(void) const
+{
+	if (_span.size() < 2)
+		return 0;
+	int max = *std::max_element(this->_span.begin(), this->_span.end());
+	int min = *std::min_element(this->_span.begin(), this->_span.end());
+	return std::abs(max - min);
+}
