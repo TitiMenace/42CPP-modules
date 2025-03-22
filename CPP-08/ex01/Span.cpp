@@ -68,7 +68,7 @@ unsigned int Span::shortestSpan(void) const
 		return 0;
 	for (std::vector<int>::const_iterator it = _span.begin(); it != _span.end();  it++)
 	{
-		if (prev_it != it && std::abs(*it - *prev_it) < (min_dist))
+		if (prev_it != it && (unsigned int)std::abs(*it - *prev_it) < (min_dist))
 			min_dist = std::abs(*it - *prev_it);
 		prev_it = it;
 	}

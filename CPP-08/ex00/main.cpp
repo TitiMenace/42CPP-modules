@@ -16,7 +16,7 @@ int main()
 		list.push_back(8);
 		list.push_back(9);
 		std::vector<int>::iterator	it = easyfind(list, 2);
-		std::cout << "Victory " << *it << "was found" << std::endl;
+		std::cout << "Victory " << *it << " was found" << std::endl;
 	} catch (std::exception &e){
 		std::cerr << e.what() << std::endl;
 	}

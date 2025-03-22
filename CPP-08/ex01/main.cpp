@@ -3,14 +3,6 @@
 
 void bigSpanTest()
 {
-        // std::vector<int>    v(10000);
-        // std::generate( v.begin(), v.end(), std::rand );
-        
-        // Span span( v.size() );
-        // std::cout << span.getN() << std::endl;;
-        // span.addNumbers( v.begin(), v.end() );
-        // std::cout << "Longest span: " << span.longestSpan() << std::endl;
-        // std::cout << "Shortest span: " << span.shortestSpan() << std::endl;
         std::vector<int>    v;
         for (int i = 0; i < 10000; i++)
         {
