@@ -5,9 +5,9 @@ CXX		= c++
 
 CFLAGS		= -g3 -Wall -Wextra -Werror -std=c++98
 
-INCLUDES	=  
+INCLUDES	=  includes.hpp
 
-FILES		= main BitcoinExchange
+FILES		= main 
 
 SRCS		= $(addsuffix .cpp, $(FILES))
 

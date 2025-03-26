@@ -1,27 +1,23 @@
 #include "includes.hpp"
-#include "Date.hpp"
 
-void	getKeyval(std::string filebuf, std::map<Date, int> &input){
+void	fillMap(std::string filebuf, std::map<std::string, double> &input){
 
-	Date	date;
+	std::string	key;
+	std::string	value;
+	double		val;
+	size_t		pos;
 	std::stringstream	data(filebuf);
+	
 
-	data >> data.year;
-	data.ignore(1, '-');
-	data >> date.month;
-	data.ignore(1, '-');
-	data >> date.day;
-	data.ignore (1, ' ');
-	data.ignore (1, '|');
-	data.ignore (1, ' ');
-
-	date >> input[date];
-	date
+	pos = filebuf.find(",");
+	key = filebuf.substr(0, pos);
+	value = filebuf.substr(pos + 1, filebuf.length() - 1);
+	std::stringstream convert(value);
+	convert >> val;
+	input[key] = val;
 }
 
-
-
-bool	parseMap(std::map<Date, int> &input, std::string inputfile){
+bool	parseMap(std::map<std::string, double> &input, const char *inputfile){
 
 	std::string		filebuf;
 	std::ifstream	file(inputfile);
@@ -31,16 +27,37 @@ bool	parseMap(std::map<Date, int> &input, std::string inputfile){
 		std::cerr << "Can't open file" << std::endl;
 		return false;
 	}
-	std::getline(file, filebuf, "\n");
-	if (filebuf == "date | value")
-		std::getline(file, filebuf);
-	getKeyval(filebuf);
+	while (std::getline(file, filebuf, '\n')){
+		if (filebuf == "date,exchange_rate")
+			std::getline(file, filebuf);
+		fillMap(filebuf, input);
+	}
+	return true;
+}
 
+bool	calculateValue(std::map<std::string, double> &input, const char *inputfile){
+
+	std::ifstream	file(inputfile);
+	if (!file.is_open()){
+
+		std::cerr << "Can't open file" << std::endl;
+		return false;
+	}
+	while (std::getline(file, filebuf, '\n')){
+		if (filebuf == "date | values")
+			std::getline(file, filebuf);
+		fillMap(filebuf, input);
+	}
 
 }
 
+void	printResult(std::string	key, double value);
 
-
+void printMap(std::map<std::string, double>& dataMap) {
+    for (std::map<std::string, double >::iterator it = dataMap.begin(); it != dataMap.end(); ++it) {
+        std::cout << it->first << " -> " << it->second << std::endl;
+    }
+}
 
 int	main(int ac, char **av){
 	
@@ -48,10 +65,11 @@ int	main(int ac, char **av){
 		std::cerr << "First argument is input.txt, second is data.csv" << std::endl;
 		return 1;
 	}
-	std::map<Date, int>	input;
-	std::string			inputfile = av[1];
-	if (!parseMap(input, inputfile))
+	std::map<std::string, double>	input;
+	if (!parseMap(input, av[2]))
 		return 1;
+	if (!calculateValue(input, av[1]))
+	printMap(input);
 
 	return 0;
 }
