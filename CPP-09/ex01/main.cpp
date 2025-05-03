@@ -1,12 +1,10 @@
 #include <iostream>
-#include <stack>
+#include <list>
 #include <sstream>
 #include <limits>
-#include <stdio.h>
-
+#include <cctype>
 
 int	main(int ac, char **av){
-
 	if (ac < 2){
 		std::cerr << "Error: Not enough arguments" << std::endl;
 		return __LINE__;
@@ -15,20 +13,22 @@ int	main(int ac, char **av){
 		std::cerr << "Error: Too many arguments" << std::endl;
 		return __LINE__;
 	}
-	std::string	input(av[1]);
-	std::stack<int>	numbers;
+
+	std::string input(av[1]);
+	std::list<int> numbers;
+
 	for (size_t i = 0; i < input.length(); i++) {
 		if (i % 2 == 0) {
 			if (std::isdigit(input[i])) {
-				numbers.push(static_cast<int>(input[i]) - '0');
+				numbers.push_front(input[i] - '0');
 			} 
 			else if (input[i] == '+' || input[i] == '-' || input[i] == '*' || input[i] == '/') {
 				if (numbers.size() < 2) {
 					std::cerr << "Error: Not enough numbers for operation " << input[i] << std::endl;
 					return __LINE__;
 				}
-				int b = numbers.top(); numbers.pop();
-				int a = numbers.top(); numbers.pop();
+				int b = numbers.front(); numbers.pop_front();
+				int a = numbers.front(); numbers.pop_front();
 				int result = 0;
 				if (input[i] == '+') {
 					if (a > 0 && b > 0 && a > (std::numeric_limits<int>::max() - b)) {
@@ -62,7 +62,7 @@ int	main(int ac, char **av){
 					}
 					result = a / b;
 				}
-				numbers.push(result);
+				numbers.push_front(result);
 			} 
 			else {
 				std::cerr << "Error: Invalid character at position " << i << ": " << input[i] << std::endl;
@@ -76,6 +76,7 @@ int	main(int ac, char **av){
 			}
 		}
 	}
+
 	if (input[input.length() - 1] == ' ') {
 		std::cerr << "Error: Invalid format: input should not end with a space" << std::endl;
 		return __LINE__;
@@ -84,6 +85,6 @@ int	main(int ac, char **av){
 		std::cerr << "Error: Too many numbers remaining" << std::endl;
 		return __LINE__;
 	}
-    std::cout << "Result: " << numbers.top() << std::endl;
-    return 0;
+	std::cout << "Result: " << numbers.front() << std::endl;
+	return 0;
 }

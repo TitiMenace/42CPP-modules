@@ -1,5 +1,5 @@
 
-NAME 		= PMergeme
+NAME 		= PmergeMe
 
 CXX		= c++
 

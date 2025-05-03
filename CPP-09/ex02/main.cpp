@@ -34,18 +34,26 @@ std::vector<size_t> generateJacobsthalOrder(size_t n) {
         ++i;
     }
 
+    std::vector<bool> added(n, false);
+
     for (size_t j = jacobsthal.size(); j-- > 1;) {
         size_t start = jacobsthal[j - 1] + 1;
-        size_t end = jacobsthal[j];
-        for (size_t k = end; k-- > start;)
+        size_t end = std::min(jacobsthal[j], n);
+        for (size_t k = end; k-- > start;) {
+            order.push_back(k);
+            added[k] = true;
+        }
+    }
+
+    // Ajoute les indices manquants
+    for (size_t k = 0; k < n; ++k) {
+        if (!added[k])
             order.push_back(k);
     }
 
-    if (n > 0)
-        order.push_back(0);
-
     return order;
 }
+
 
 template <typename T>
 void ford_johnson_sort(T& c) {
@@ -98,19 +106,20 @@ void print(const T& container) {
 }
 
 template <typename Container>
-void sort_and_print(Container& cont) {
-    std::cout << "Before ";
+double sort_and_time(Container& cont) {
+    /* std::cout << "Before ";
     print(cont);
-    std::cout << std::endl;
+    std::cout << std::endl; */
 
     double timer_start = clock();
     ford_johnson_sort(cont);
     double duration = clock() - timer_start;
 
-    std::cout << "After ";
-    print(cont);
-    std::cout << std::endl;
-    std::cout << "Duration: " << duration << " us" << std::endl;
+   /*  std::cout << "After ";
+    print(cont); */
+    //std::cout << std::endl;
+    //std::cout << "Duration: " << duration << " us" << std::endl;
+    return duration;
 }
 
 int main(int argc, char** argv) {
@@ -119,29 +128,40 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    std::vector<int> vec;
+    std::vector<int> input;
     for (int i = 1; argv[i]; ++i) {
         if (!is_number(argv[i])) {
             std::cerr << "Invalid input" << std::endl;
             return 1;
         }
-        vec.push_back(std::atoi(argv[i]));
+        input.push_back(std::atoi(argv[i]));
     }
 
-    if (has_duplicates(vec)) {
-        std::cerr << "has duplicates" << std::endl;
-        return 1;
-    }
+    std::vector<int> vec = input;
+    std::deque<int> deq(input.begin(), input.end());
 
-    std::vector<int> vec_copy = vec;
-    std::deque<int> deq(vec.begin(), vec.end());
+    std::cout << "Before: ";
+    print(input);
+    std::cout << std::endl;
 
-    std::cout << "Sorting std::vector<int>:\n";
-    sort_and_print(vec_copy);
+    double vec_duration = sort_and_time(vec);
+    double deq_duration = sort_and_time(deq);
 
-    std::cout << "\nSorting std::deque<int>:\n";
-    sort_and_print(deq);
+    std::cout << "After: ";
+    print(vec); // ou deq, c’est pareil après tri
+    std::cout << std::endl;
+
+    std::cout << "Time to process a range of " << input.size()
+              << " elements with std::vector : " << vec_duration << " us" << std::endl;
+
+    std::cout << "Time to process a range of " << input.size()
+              << " elements with std::deque : " << deq_duration << " us" << std::endl;
 
     return 0;
-}
+ //   if (has_duplicates(vec)) {
+   //     std::cerr << "has duplicates" << std::endl;
+   //     return 1;
+   // }
 
+   
+}
