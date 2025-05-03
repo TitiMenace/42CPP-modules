@@ -13,7 +13,7 @@ SRCS		= $(addsuffix .cpp, $(FILES))
 
 OBJS_DIRS	= .build
 
-OBJS		= 	$(patsubst %.cpp, $(OBJS_DIRS)/%.o, $(SRCS))
+OBJS		=  $(patsubst %.cpp, $(OBJS_DIRS)/%.o, $(SRCS))
 
 all:	$(NAME)
 
