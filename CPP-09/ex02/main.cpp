@@ -44,8 +44,6 @@ std::vector<size_t> generateJacobsthalOrder(size_t n) {
             added[k] = true;
         }
     }
-
-    // Ajoute les indices manquants
     for (size_t k = 0; k < n; ++k) {
         if (!added[k])
             order.push_back(k);
